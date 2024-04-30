@@ -26,6 +26,7 @@ class DownloadDocController extends Controller
     $this->namer();
     $this->headerSeter();
     $this->finallyDownload();
+    return 'concluído';
   }
 
   public function namer()
@@ -50,6 +51,6 @@ class DownloadDocController extends Controller
     $objWriter = IOFactory::createWriter($this->phpWord, $this->formactFile['driver']);
     //$objWriter->save('helloWorld.odt');//fazer isso em outra function
     $saved = $objWriter->save("php://output");//"php://output" inicia download automático.
-    dd();
+    
   }
 }

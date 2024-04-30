@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;//objeto documento
 use Illuminate\Support\Collection;
+use PhpOffice\PhpWord\Element\Section;
 
 class RenderController extends Controller
 {
@@ -14,6 +15,7 @@ class RenderController extends Controller
   private array $arraySections = [];
   public Collection $fontStyles;
   private PhpWord $phpWord;
+  private Section $section;
   
 
   public function __construct()
@@ -21,11 +23,12 @@ class RenderController extends Controller
     $this->textos = (new TextosController)->getTexts();
     $this->fontes = (new FontesController)->getFonts();
     $this->phpWord = new PhpWord();
+    $this->section = $this->phpWord->addSection();
   }
 
  
   public function renderDoc()
-  { 
+  {
     $this->addFontToPhpWord();
     $this->addTextToPhpWord();
     return $this->phpWord;
@@ -44,8 +47,7 @@ class RenderController extends Controller
   public function addTextToPhpWord()
   {
     collect($this->fontStyles)->map(function ($fonte, $keyFonte){
-      $section = $this->phpWord->addSection();
-      $this->arraySections[$keyFonte] = $section->addText($this->textos[$keyFonte],$keyFonte);
+      $this->arraySections[$keyFonte] = $this->section->addText($this->textos[$keyFonte],$keyFonte);
     });
   }
 }
