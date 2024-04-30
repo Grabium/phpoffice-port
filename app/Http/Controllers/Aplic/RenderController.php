@@ -5,24 +5,26 @@ namespace App\Http\Controllers\Aplic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;//objeto documento
-use Illuminate\Support\Collection;
+//use Illuminate\Support\Collection;
 use PhpOffice\PhpWord\Element\Section;
+//use PhpOffice\PhpWord\Style\Alignment;
 
 class RenderController extends Controller
 {
-  private array $textos = [];
-  private array $fontes = [];
-  private array $arraySections = [];
-  private array $arrayParagrathStyle = []; //armazena PhpOffice\PhpWord\Style\Paragraph
-  public Collection $fontStyles;
-  private PhpWord $phpWord;
-  private Section $section;
+  private array $textos        = [];
+  private array $fontes        = [];
+  private array $paragrafos    = [];
   
+  private array $fontStyles        = [];
+  private array $paragrathStyles   = [];
+  private Section $section;
+  private PhpWord $phpWord;
 
   public function __construct()
   {
     $this->textos = (new TextosController)->getTexts();
     $this->fontes = (new FontesController)->getFonts();
+    $this->paragrafos = (new ParagrathsController)->getParagraths();
     $this->phpWord = new PhpWord();
     $this->section = $this->phpWord->addSection();
   }
@@ -30,30 +32,44 @@ class RenderController extends Controller
  
   public function renderDoc()
   {
-    $this->addChangesToPhpWord();
+    $this->addParagraphStyleToPhpWord();
+    $this->addFontsStyleToPhpWord();
     $this->addTextToPhpWord();
     return $this->phpWord;
   }
 
-  public function addChangesToPhpWord()
+
+  public function addParagraphStyleToPhpWord()
   {
-    $this->fontStyles = collect($this->fontes)->map(function ($fonte, $key){
-      $this->arrayParagrathStyle[$key] = $this->phpWord->addParagraphStyle($key, ['align' => 'center' ]);
-      return $this->phpWord->addFontStyle(
-        $key,
-        ['name' => $fonte['name'], 'size' => $fonte['size'], 'color' => $fonte['color'], 'bold' => $fonte['bold']]
+    foreach($this->paragrafos as $key => $paragrafo){
+      $this->phpWord->addParagraphStyle(
+        $key, ['align' => $paragrafo['align'] ]);
+    };
+    unset($this->paragrafos);
+  }
+
+  public function addFontsStyleToPhpWord()
+  {
+    foreach($this->fontes as $key => $fonte){
+      $this->phpWord->addFontStyle(
+        $key, [
+          'name' => $fonte['name'], 
+          'size' => $fonte['size'], 
+          'color' => $fonte['color'], 
+          'bold' => $fonte['bold']
+        ]
       );
-    });
+    };
   }
 
   public function addTextToPhpWord()
   {
-    collect($this->fontStyles)->map(function ($fonte, $key){
-      $this->arraySections[$key] = $this->section->addText(
+    foreach($this->fontes as $key => $fonte){
+      $this->section->addText(
         $this->textos[$key],
-        $key,
-        $this->arrayParagrathStyle[$key]
+        $key, //estilo da fonte
+        $key  //estilo do parágrafo
       );
-    });
+    };
   }
 }

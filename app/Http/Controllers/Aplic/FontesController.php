@@ -17,15 +17,15 @@ class FontesController extends Controller
   public function setFonts()
   {
     return [
-      'cabecalho' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'titulo' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'superior' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'resolve' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'inferior-1' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'inferior-2' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'inferior-3' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'assinante' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
-      'cargo' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false],
+      'cabecalho' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
+      'titulo' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
+      'superior' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false,'align' => 'left' ],
+      'resolve' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
+      'inferior-1' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false,'align' => 'left' ],
+      'inferior-2' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false,'align' => 'left' ],
+      'inferior-3' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false,'align' => 'left' ],
+      'assinante' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
+      'cargo' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
     ];
   }
 }
