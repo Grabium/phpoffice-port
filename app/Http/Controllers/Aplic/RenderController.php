@@ -13,6 +13,7 @@ class RenderController extends Controller
   private array $textos = [];
   private array $fontes = [];
   private array $arraySections = [];
+  private array $arrayParagrathStyle = []; //armazena PhpOffice\PhpWord\Style\Paragraph
   public Collection $fontStyles;
   private PhpWord $phpWord;
   private Section $section;
@@ -29,14 +30,15 @@ class RenderController extends Controller
  
   public function renderDoc()
   {
-    $this->addFontToPhpWord();
+    $this->addChangesToPhpWord();
     $this->addTextToPhpWord();
     return $this->phpWord;
   }
 
-  public function addFontToPhpWord()
+  public function addChangesToPhpWord()
   {
     $this->fontStyles = collect($this->fontes)->map(function ($fonte, $key){
+      $this->arrayParagrathStyle[$key] = $this->phpWord->addParagraphStyle($key, ['align' => 'center' ]);
       return $this->phpWord->addFontStyle(
         $key,
         ['name' => $fonte['name'], 'size' => $fonte['size'], 'color' => $fonte['color'], 'bold' => $fonte['bold']]
@@ -46,8 +48,12 @@ class RenderController extends Controller
 
   public function addTextToPhpWord()
   {
-    collect($this->fontStyles)->map(function ($fonte, $keyFonte){
-      $this->arraySections[$keyFonte] = $this->section->addText($this->textos[$keyFonte],$keyFonte);
+    collect($this->fontStyles)->map(function ($fonte, $key){
+      $this->arraySections[$key] = $this->section->addText(
+        $this->textos[$key],
+        $key,
+        $this->arrayParagrathStyle[$key]
+      );
     });
   }
 }
