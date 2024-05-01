@@ -69,11 +69,9 @@ class RenderController extends Controller
     $this->section->addImage(
       'logo.png',
       array(
-        'width'         => 100,
+        'width'         => 400,
         'height'        => 100,
-        'marginTop'     => -1,
-        'marginLeft'    => -1,
-        'wrappingStyle' => 'behind'
+        'align'         => 'center'
       )
     );
 
