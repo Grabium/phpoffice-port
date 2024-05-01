@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Aplic\PrincipalController;
 
 /*
+
+https://github.com/DerekMarcinyshyn/phpword/blob/master/samples/Sample_01_SimpleText.php
+https://phpoffice.github.io/PHPWord/usage/styles/paragraph.html
+https://stackoverflow.com/questions/49914479/text-alignment-in-textbox-in-phpword
+https://phpword.readthedocs.io/en/latest/styles.html#paragraph
+https://github.com/Grabium/PHPWord/blob/master/docs/usage/styles/paragraph.md
+
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------

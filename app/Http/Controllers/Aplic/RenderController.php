@@ -22,11 +22,11 @@ class RenderController extends Controller
 
   public function __construct()
   {
-    $this->textos = (new TextosController)->getTexts();
-    $this->fontes = (new FontesController)->getFonts();
+    $this->textos     = (new TextosController)->getTexts();
+    $this->fontes     = (new FontesController)->getFonts();
     $this->paragrafos = (new ParagrathsController)->getParagraths();
-    $this->phpWord = new PhpWord();
-    $this->section = $this->phpWord->addSection();
+    $this->phpWord    = new PhpWord();
+    $this->section    = $this->phpWord->addSection();
   }
 
  
@@ -65,6 +65,7 @@ class RenderController extends Controller
   public function addTextToPhpWord()
   {
     foreach($this->fontes as $key => $fonte){
+      $this->section->addTextBreak(3);
       $this->section->addText(
         $this->textos[$key],
         $key, //estilo da fonte

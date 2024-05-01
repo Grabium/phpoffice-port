@@ -18,6 +18,7 @@ class FontesController extends Controller
   {
     return [
       'cabecalho' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
+      'linha' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
       'titulo' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
       'superior' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false,'align' => 'left' ],
       'resolve' => ['name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => false, 'align' => 'center'],
