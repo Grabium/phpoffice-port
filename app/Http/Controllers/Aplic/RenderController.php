@@ -75,7 +75,13 @@ class RenderController extends Controller
       )
     );
 
-    
+    $this->section->addImage(
+      'linha_hr.png',
+      array(
+        'width'         => 600, //quase 17 na régua.
+        'align'         => 'center'
+      )
+    );
 
     foreach($this->fontes as $key => $fonte){
       $this->section->addTextBreak(3);
