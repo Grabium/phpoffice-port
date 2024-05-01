@@ -11,6 +11,8 @@ use PhpOffice\PhpWord\Element\Section;
 
 class RenderController extends Controller
 {
+  private array $margens = ['marginTop'    =>  500, 'marginBottom' =>  500,
+                            'marginLeft'   => 1000, 'marginRight'  => 1000];
   private array $textos        = [];
   private array $fontes        = [];
   private array $paragrafos    = [];
@@ -26,7 +28,7 @@ class RenderController extends Controller
     $this->fontes     = (new FontesController)->getFonts();
     $this->paragrafos = (new ParagrathsController)->getParagraths();
     $this->phpWord    = new PhpWord();
-    $this->section    = $this->phpWord->addSection();
+    $this->section    = $this->phpWord->addSection($this->margens);
   }
 
  
@@ -65,7 +67,7 @@ class RenderController extends Controller
   public function addTextToPhpWord()
   {
     $this->section->addImage(
-      'mpf.jpg',
+      'logo.png',
       array(
         'width'         => 100,
         'height'        => 100,
@@ -74,6 +76,9 @@ class RenderController extends Controller
         'wrappingStyle' => 'behind'
       )
     );
+
+    
+
     foreach($this->fontes as $key => $fonte){
       $this->section->addTextBreak(3);
       $this->section->addText(
