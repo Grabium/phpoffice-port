@@ -64,6 +64,16 @@ class RenderController extends Controller
 
   public function addTextToPhpWord()
   {
+    $this->section->addImage(
+      'mpf.jpg',
+      array(
+        'width'         => 100,
+        'height'        => 100,
+        'marginTop'     => -1,
+        'marginLeft'    => -1,
+        'wrappingStyle' => 'behind'
+      )
+    );
     foreach($this->fontes as $key => $fonte){
       $this->section->addTextBreak(3);
       $this->section->addText(
